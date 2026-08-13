@@ -11,116 +11,167 @@ API_KEY = "7189814021"
 
 # 👑 Your Details & Customization
 OWNER_NAME = "𝐅𝐫𝐞𝐱𝐱𝐲"
-PROJECT_NAME = "𝑫𝒓𝒂𝒌𝒐𝑿𝑵𝒂𝒆𝒆𝒎"
+PROJECT_NAME = "𝑫𝒓𝒂𝒌𝒐𝑿𝑵𝒂𝒆𝒆𝒎 API"
 
-def format_and_sort_data(data):
-    priority_keys = [
-        "api_name", "NAME", "name", "FNAME", "fname", 
-        "MOBILE", "mobile", "ALT", "alt", "ID", "id", 
-        "ADDRESS", "address", "CIRCLE", "circle",
-        "owner_contact", "branding", "developer", "processed_by", "powered_by", "api_owner"
-    ]
+def generate_html_output(final_data, new_records):
+    """Premium Hacker Terminal UI Generator"""
     
-    if isinstance(data, dict):
-        sorted_data = {}
-        for key in priority_keys:
-            if key in data:
-                sorted_data[key] = format_and_sort_data(data[key])
-        for key, value in data.items():
-            if key not in sorted_data:
-                sorted_data[key] = format_and_sort_data(value)
-        return sorted_data
-    elif isinstance(data, list):
-        return [format_and_sort_data(item) for item in data]
+    records_html = ""
+    if not new_records:
+        records_html = "<div class='record-box' style='text-align:center; color:#ff003c;'>❌ No Data Found For This Number ❌</div>"
     else:
-        return data
+        for idx, rec in enumerate(new_records):
+            records_html += f"""
+            <div class="record-box">
+                <div class="record-title">▼▼ [ RECORD {idx + 1} ] ▼▼</div>
+                <table class="data-table">
+                    <tr><td class="key">NAME</td><td class="value">: {rec.get('NAME', 'N/A')}</td></tr>
+                    <tr><td class="key">FNAME</td><td class="value">: {rec.get('FNAME', 'N/A')}</td></tr>
+                    <tr><td class="key">MOBILE</td><td class="value">: {rec.get('MOBILE', 'N/A')}</td></tr>
+                    <tr><td class="key">ID</td><td class="value">: {rec.get('ID', 'N/A')}</td></tr>
+                    <tr><td class="key">ADDRESS</td><td class="value">: {rec.get('ADDRESS', 'N/A')}</td></tr>
+                    <tr><td class="key">CIRCLE</td><td class="value">: {rec.get('CIRCLE', 'N/A')}</td></tr>
+                </table>
+            </div>
+            """
 
-def generate_html_output(data, project_name, owner):
-    """Neon Theme Hacker UI for Web Browser with Image Background"""
-    
-    pretty_json = json.dumps(data, indent=4, ensure_ascii=False)
-    
     html_content = f"""
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{project_name} - Advanced System</title>
+        <title>{PROJECT_NAME} - Advanced System</title>
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
             body {{
-                background: url('1000324185.png') no-repeat center center fixed;
+                /* Added / before image name to fix Vercel path issue */
+                background: url('/1000324185.png') no-repeat center center fixed, #0b0c10;
                 background-size: cover;
                 color: #e0b0ff;
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Share Tech Mono', 'Courier New', monospace;
                 margin: 0;
-                padding: 20px;
+                padding: 15px;
             }}
             .container {{
-                max-width: 850px;
-                margin: auto;
-                background: rgba(10, 10, 20, 0.75);
-                border: 2px solid #bc13fe;
-                border-radius: 15px;
-                box-shadow: 0 0 25px rgba(188, 19, 254, 0.6);
-                backdrop-filter: blur(8px);
+                max-width: 800px;
+                margin: 20px auto;
+                background: rgba(10, 10, 15, 0.85);
+                border: 1px solid #bc13fe;
+                border-radius: 12px;
+                box-shadow: 0 0 30px rgba(188, 19, 254, 0.4), inset 0 0 15px rgba(188, 19, 254, 0.2);
+                backdrop-filter: blur(10px);
                 padding: 25px;
+                position: relative;
+                overflow: hidden;
+            }}
+            .container::before {{
+                content: "";
+                position: absolute;
+                top: 0; left: 0; right: 0; height: 3px;
+                background: linear-gradient(90deg, transparent, #ff00ff, #00ffff, transparent);
+                animation: scanline 3s linear infinite;
+            }}
+            @keyframes scanline {{
+                0% {{ transform: translateX(-100%); }}
+                100% {{ transform: translateX(100%); }}
             }}
             h1 {{
                 text-align: center;
-                color: #ff00ff;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                text-shadow: 0 0 10px #ff00ff, 0 0 20px #bc13fe, 0 0 40px #bc13fe;
+                color: #fff;
+                text-shadow: 0 0 10px #ff00ff, 0 0 20px #bc13fe;
+                font-size: 32px;
+                margin-top: 0;
+            }}
+            .branding {{
+                text-align: center;
+                margin-bottom: 30px;
             }}
             .badge {{
-                background: rgba(20, 20, 30, 0.9);
+                background: rgba(188, 19, 254, 0.1);
                 color: #00ffff;
-                padding: 8px 15px;
-                border-radius: 8px;
-                font-weight: bold;
-                display: inline-block;
-                margin-bottom: 20px;
-                box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+                padding: 8px 20px;
                 border: 1px solid #00ffff;
+                border-radius: 20px;
+                font-size: 16px;
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+                text-transform: uppercase;
+                letter-spacing: 1px;
             }}
-            .status {{
+            .terminal-header {{
                 color: #00ff66;
-                text-shadow: 0 0 10px rgba(0, 255, 102, 0.7);
+                text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+                font-size: 18px;
+                margin-bottom: 20px;
+                text-align: center;
+                border-bottom: 1px dashed #00ff66;
+                padding-bottom: 10px;
+            }}
+            .record-box {{
+                background: rgba(0, 0, 0, 0.7);
+                border: 1px solid #00ff66;
+                border-left: 5px solid #00ff66;
+                margin-bottom: 20px;
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: 0 4px 15px rgba(0, 255, 102, 0.1);
+            }}
+            .record-title {{
+                color: #ffff00;
                 font-weight: bold;
-                font-size: 1.1em;
+                font-size: 18px;
+                margin-bottom: 12px;
+                text-shadow: 0 0 8px rgba(255, 255, 0, 0.5);
             }}
-            pre {{
-                background: rgba(0, 0, 0, 0.8);
+            .data-table {{
+                width: 100%;
+                border-collapse: collapse;
+            }}
+            .data-table td {{
+                padding: 6px 0;
+                vertical-align: top;
+                font-size: 16px;
+            }}
+            .key {{
+                color: #00ffff;
+                width: 120px;
+                font-weight: bold;
+            }}
+            .value {{
                 color: #00ff66;
-                padding: 20px;
-                border-radius: 10px;
-                border: 1px solid #bc13fe;
-                box-shadow: inset 0 0 15px rgba(188, 19, 254, 0.3);
-                overflow-x: auto;
-                font-size: 15px;
-                line-height: 1.6;
+                word-break: break-word;
             }}
             .footer {{
                 text-align: center;
-                margin-top: 25px;
-                color: #d1d5db;
+                margin-top: 30px;
+                color: #888;
                 font-size: 13px;
-                text-shadow: 0 0 5px #ffffff;
+                border-top: 1px solid #333;
+                padding-top: 15px;
+            }}
+            .footer span {{
+                color: #bc13fe;
             }}
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>⚡ {project_name} ⚡</h1>
-            <div style="text-align: center;">
-                <span class="badge">Powered by: {owner}</span>
+            <h1>🌌 {PROJECT_NAME} 🌌</h1>
+            <div class="branding">
+                <span class="badge">Powered By: {OWNER_NAME}</span>
             </div>
-            <p class="status">🔥 [ SYSTEM STATUS ]: ONLINE & ENCRYPTED</p>
-            <h3 style="color: #bc13fe; text-shadow: 0 0 5px #bc13fe;">📁 Extracted Data Payload:</h3>
-            <pre>{pretty_json}</pre>
+            
+            <div class="terminal-header">
+                🔥 [ SYSTEM STATUS ]: ONLINE & SECURED 🔥<br><br>
+                ▼▼ [ NUMBER INFO DETAILS ] ▼▼
+            </div>
+            
+            <div class="records">
+                {records_html}
+            </div>
+
             <div class="footer">
-                &copy; 2026 {project_name} | Secured by {owner}
+                &copy; 2026 <span>{PROJECT_NAME}</span> | Advanced Data Extraction System
             </div>
         </div>
     </body>
@@ -131,7 +182,7 @@ def generate_html_output(data, project_name, owner):
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
-            # Serve the background image if requested by the browser
+            # 📸 Background image loading fix
             if self.path.endswith("1000324185.png"):
                 try:
                     with open("1000324185.png", "rb") as f:
@@ -158,35 +209,55 @@ class handler(BaseHTTPRequestHandler):
             res = requests.get(url, timeout=10)
             
             if res.status_code == 200:
-                data = res.json()
+                original_data = res.json()
             else:
                 raise Exception("Original Server Offline")
 
-            # 🔥 MODIFY RESPONSE
-            if isinstance(data, dict):
-                data["api_name"] = PROJECT_NAME
-                data["owner_contact"] = f"@{OWNER_NAME}"
-                data["branding"] = OWNER_NAME
-                data["developer"] = OWNER_NAME
-                data["processed_by"] = OWNER_NAME
-                data["powered_by"] = OWNER_NAME
-                data["api_owner"] = OWNER_NAME
+            # 🔥 RESTRUCTURE DATA (Sasta data ko premium step-by-step me convert karna)
+            new_records = []
+            if "data" in original_data and isinstance(original_data["data"], list):
+                for record in original_data["data"]:
+                    # Exact sequence set kar rahe hain yahan
+                    new_record = {
+                        "NAME": record.get("full_name", record.get("name", "")),
+                        "FNAME": record.get("the_name_of_the_father", record.get("fname", "")),
+                        "MOBILE": record.get("phone", record.get("mobile", "")),
+                        "ID": record.get("document_number", record.get("id", "")),
+                        "ADDRESS": record.get("address", ""),
+                        "CIRCLE": record.get("region", record.get("circle", ""))
+                    }
+                    # Khali (empty) fields ko hide karne ke liye
+                    clean_record = {k: v for k, v in new_record.items() if v != ""}
+                    new_records.append(clean_record)
 
-            final_data = format_and_sort_data(data)
+            final_data = {
+                "api_name": PROJECT_NAME,
+                "owner_contact": f"@{OWNER_NAME}",
+                "branding": OWNER_NAME,
+                "developer": OWNER_NAME,
+                "processed_by": OWNER_NAME,
+                "powered_by": OWNER_NAME,
+                "api_owner": OWNER_NAME,
+                "status": original_data.get("status", "success"),
+                "results_count": original_data.get("results_count", len(new_records)),
+                "data": new_records
+            }
 
             accept_header = self.headers.get("Accept", "")
             
             if "text/html" in accept_header:
+                # Agar Browser se khola hai to Premium UI
                 self.send_response(200)
                 self.send_header("Content-type", "text/html; charset=utf-8")
                 self.end_headers()
-                html_output = generate_html_output(final_data, PROJECT_NAME, OWNER_NAME)
+                html_output = generate_html_output(final_data, new_records)
                 self.wfile.write(html_output.encode('utf-8'))
             else:
+                # Agar Code/Bot se khola hai to Step-by-Step Clean JSON
                 self.send_response(200)
                 self.send_header("Content-type", "application/json; charset=utf-8")
                 self.end_headers()
-                self.wfile.write(json.dumps(final_data, ensure_ascii=False).encode('utf-8'))
+                self.wfile.write(json.dumps(final_data, indent=4, ensure_ascii=False).encode('utf-8'))
 
         except Exception as e:
             error_response = {"error": str(e)}
