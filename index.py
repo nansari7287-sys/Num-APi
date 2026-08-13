@@ -9,6 +9,9 @@ BASE_API = "https://yash-code-with-ai.alphamovies.workers.dev/"
 # 🔑 Hidden API key
 API_KEY = "7189814021"
 
+# 👑 Your Stylized Name
+OWNER_NAME = "𝓕𝓻𝓮𝔁𝔁𝔂"
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
@@ -23,27 +26,35 @@ class handler(BaseHTTPRequestHandler):
             # 🔗 Call original API
             url = f"{BASE_API}?num={number}&key={API_KEY}"
             res = requests.get(url, timeout=10)
-            data = res.json()
+            
+            # Agar original API text return karti hai ya error deti hai to usko handle karne ke liye
+            if res.status_code == 200:
+                data = res.json()
+            else:
+                raise Exception("Original API se response nahi mila")
 
             # 🔥 MODIFY RESPONSE (OWNER CHANGE)
-            data["owner_contact"] = "@DarkOwnerX4"
-            data["branding"] = "@DarkOwnerX4"
-            data["developer"] = "@DarkOwnerX4"
-            data["processed_by"] = "@DarkOwnerX4"
+            data["owner_contact"] = f"@{OWNER_NAME}"
+            data["branding"] = OWNER_NAME
+            data["developer"] = OWNER_NAME
+            data["processed_by"] = OWNER_NAME
+            
+            # ⚡ Powered By
+            data["powered_by"] = OWNER_NAME
 
             # ➕ Extra custom field
-            data["api_owner"] = "DarkOwnerX4"
+            data["api_owner"] = OWNER_NAME
 
-            # OPTIONAL: clean unwanted fields
-            # del data["owner_contact"]
-
+            # Response send karna
             self.send_response(200)
-            self.send_header("Content-type", "application/json")
+            self.send_header("Content-type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(data).encode())
+            
+            # Stylish text ko render karne ke liye utf-8 encoding zaroori hai
+            self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
 
         except Exception as e:
             self.send_response(500)
-            self.send_header("Content-type", "application/json")
+            self.send_header("Content-type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps({"error": str(e)}).encode())
+            self.wfile.write(json.dumps({"error": str(e)}, ensure_ascii=False).encode('utf-8'))
