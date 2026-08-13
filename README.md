@@ -1,21 +1,35 @@
-# 🕵️‍♂️ Naeem Api
+<h1 align="center">🕵️‍♂️ 𝑫𝒓𝒂𝒌𝒐𝑿𝑵𝒂𝒆𝒆𝒎 - Advanced OSINT Tool</h1>
 
-Welcome to **Naeem Api**! A powerful and fast API to fetch Open Source Intelligence (OSINT) data for any given phone number. 
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Online-brightgreen.svg?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Powered%20By-𝐅𝐫𝐞𝐱𝐱𝐲-blueviolet.svg?style=for-the-badge" alt="Owner">
+  <img src="https://img.shields.io/badge/Hosting-Vercel-black.svg?style=for-the-badge&logo=vercel" alt="Vercel">
+  <img src="https://img.shields.io/badge/Language-Python-blue.svg?style=for-the-badge&logo=python" alt="Python">
+</p>
 
-### 👑 Developer & Owner
-**Powered By:** 𝐅𝐫𝐞𝐱𝐱𝐲
+<p align="center">
+  <b>A lightning-fast, highly detailed, and dual-mode Open Source Intelligence (OSINT) API.</b><br>
+  <i>Designed for speed, accuracy, and seamless integration.</i>
+</p>
 
 ---
 
-## 🚀 Features
-- ⚡ **Lightning Fast:** Instant data retrieval.
-- 🛡️ **Custom Branded:** Fully stylized JSON responses.
-- 🌐 **Serverless Ready:** Easily deployable on platforms like Render, Railway, or Vercel.
+## ✨ Features
 
-## 🛠️ Usage
+- ⚡ **Ultra-Fast Processing:** Fetch detailed number data in milliseconds.
+- 🎨 **Dual-Mode Output:** 
+  - **Browser:** Beautiful, hacker-style colorful dashboard.
+  - **Bot/Script:** Clean, strictly ordered JSON response.
+- 🛡️ **Custom Branded:** Fully branded with **𝐅𝐫𝐞𝐱𝐱𝐲** tags and customized data sorting.
+- 🌍 **Serverless Architecture:** 100% ready for Vercel deployment without heavy server costs.
 
-Make a simple `GET` request to the API with the target number.
+---
 
-**Endpoint:**
-```http
-GET /?num=YOUR_NUMBER
+## 🚀 Usage Guide
+
+Here is how you can use the **Naeem Api** across different platforms.
+
+### 🌐 1. Browser Test
+Simply open the URL in any web browser to see the colorful UI.
+```text
+[https://num-a-pi.vercel.app/?num=YOUR_NUMBER_HERE](https://num-a-pi.vercel.app/?num=YOUR_NUMBER_HERE)
