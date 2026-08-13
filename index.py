@@ -11,7 +11,7 @@ API_KEY = "7189814021"
 
 # 👑 Your Details & Customization
 OWNER_NAME = "𝐅𝐫𝐞𝐱𝐱𝐲"
-PROJECT_NAME = "𝑫𝒓𝒂𝒌𝒐𝑿𝑵𝒂𝒆𝒆𝒎 API"
+PROJECT_NAME = "𝑫𝒓𝒂𝒌𝒐𝑿𝑵𝒂𝒆𝒆𝒎"
 
 def format_and_sort_data(data):
     priority_keys = [
